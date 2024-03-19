@@ -353,7 +353,7 @@ class ProtectFile:
             print(self._fstat)
             print("New stats:")
             print(new_stats)
-            self.restore()
+            # self.restore()
         else:
             # All is fine: move result from temporary file to original
             self.mv_temp()
@@ -416,7 +416,10 @@ class ProtectFile:
             else:
                 alt_file = Path(self.file.parent, self.file.name + extension).resolve()
             self.mv_temp(alt_file)
-            print(f"Saved calculation results in {alt_file.name}.")
+            if self._eos_url is not None:
+                print(f"Saved calculation results in {alt_file}.")
+            else:
+                print(f"Saved calculation results in {alt_file.name}.")
 
 
     def release(self, pop=True):
