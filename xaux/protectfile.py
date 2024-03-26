@@ -23,6 +23,11 @@ protected_open = {}
 # Use debug flag below to inspect steps in file IO
 _debug = False
 
+class FileChangedException(Exception):
+    """Exception raised when file has changed"""
+    pass
+
+
 def _print_debug(prc, msg):
     if _debug:
         print(prc,": ", msg, "\n")
@@ -353,6 +358,7 @@ class ProtectFile:
             print(self._fstat)
             print("New stats:")
             print(new_stats)
+            raise FileChangedException
             # self.restore()
         else:
             # All is fine: move result from temporary file to original
