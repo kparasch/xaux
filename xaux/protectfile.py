@@ -229,7 +229,7 @@ class ProtectFile:
         arg['file'] = Path(arg['file'])
         file = arg['file']
         self._file = file
-        self._lock =  Path(file.name + '.lock')
+        self._lock =  Path(file.parent, file.name + '.lock')
         self._temp = Path(tempdir.name, file.name).resolve()
 
         # We throw potential FileNotFoundError and FileExistsError before
