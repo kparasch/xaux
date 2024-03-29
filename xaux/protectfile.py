@@ -358,12 +358,13 @@ class ProtectFile:
             print(self._fstat)
             print("New stats:")
             print(new_stats)
-            raise FileChangedException
             # self.restore()
         else:
             # All is fine: move result from temporary file to original
             self.mv_temp()
         self.release()
+        if file_changed:
+            raise FileChangedException
 
 
     @property
